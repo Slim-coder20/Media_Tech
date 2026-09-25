@@ -30,9 +30,9 @@
                       <p class="text-muted mb-0">Administrateur</p>
                   </div>
               </div>
-              <a class="dropdown-item" href="profile.html">Profile</a>
-              <a class="dropdown-item" href="settings.html">Paramettre</a>
-              <a class="dropdown-item" href="login.html">Deconnexion</a>
+              <a class="dropdown-item" href="{{ route('profile.edit')}}">Profile</a>
+              <a class="dropdown-item" href="{{ route('profile.update')}}">Paramettre</a>
+              <a class="dropdown-item" href="{{ route('logout')}}">Deconnexion</a>
           </div>
       </li>
   </ul>
