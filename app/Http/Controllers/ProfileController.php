@@ -26,15 +26,46 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $validated = $request->validated();
+        unset($validated['image']);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill($validated);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('image')) {
+            $this->deleteStoredProfileImage($user->image);
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+            $fileName = now()->format('YmdHis').'.'.$request->file('image')->extension();
+            $directory = public_path('back_auth/assets/profile');
+
+            if (! is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $request->file('image')->move($directory, $fileName);
+            $user->image = $fileName;
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile modifié avec succès');
+    }
+
+    private function deleteStoredProfileImage(?string $image): void
+    {
+        if ($image === null || $image === '' || str_contains($image, '/')) {
+            return;
+        }
+
+        $path = public_path('back_auth/assets/profile/'.$image);
+
+        if (is_file($path)) {
+            unlink($path);
+        }
     }
 
     /**

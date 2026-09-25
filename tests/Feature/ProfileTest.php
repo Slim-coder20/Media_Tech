@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 
 test('profile page is displayed', function () {
     $user = User::factory()->create();
@@ -31,6 +32,33 @@ test('profile information can be updated', function () {
     $this->assertSame('Test User', $user->name);
     $this->assertSame('test@example.com', $user->email);
     $this->assertNull($user->email_verified_at);
+});
+
+test('profile image is stored with its extension', function () {
+    $user = User::factory()->create();
+
+    $response = $this
+        ->actingAs($user)
+        ->patch('/profile', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'image' => UploadedFile::fake()->image('photo.png'),
+        ]);
+
+    $response
+        ->assertSessionHasNoErrors()
+        ->assertRedirect('/profile');
+
+    $user->refresh();
+
+    expect($user->image)->toEndWith('.png')
+        ->and($user->image)->not->toContain('/');
+
+    $path = public_path('back_auth/assets/profile/'.$user->image);
+
+    expect(is_file($path))->toBeTrue();
+
+    unlink($path);
 });
 
 test('email verification status is unchanged when the email address is unchanged', function () {

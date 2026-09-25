@@ -19,11 +19,11 @@
             <div class="profile-header">
                 <div class="row align-items-center">
                     <div class="col-auto profile-image">
-                        <a href="#"> <img class="rounded-circle" alt="User Image"
-                                src="{{ asset('back_auth/assets/img/profiles/avatar-01.png') }}"> </a>
+                        <a href="#"> <img class="rounded-circle object-fit-cover" alt="User Image" width="120" height="120"
+                                src="{{ asset('back_auth/assets/profile/'.Auth::user()->image) }}"> </a>
                     </div>
                     <div class="col ml-md-n2 profile-user-info">
-                        <h4 class="user-name mb-3">John Doe</h4>
+                        <h4 class="user-name mb-3">{{ Auth::user()->name }}</h4>
                         <h6 class="text-muted mt-1">Admin</h6>
                     </div>
 
@@ -38,6 +38,9 @@
             </div>
             <div class="tab-content profile-tab-cont">
                 <div class="tab-pane fade show active" id="per_details_tab">
+                    @if (session('status'))
+                        <div class="alert alert-success">{{ session('status') }}</div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
@@ -48,18 +51,14 @@
                                                 class="fa fa-edit mr-1"></i>Modifier
                                         </a>
                                     </h5>
-                                    <div class="row mt-5">
-                                        <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Prenom</p>
-                                        <p class="col-sm-9">John</p>
-                                    </div>
                                     <div class="row">
                                         <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Nom</p>
-                                        <p class="col-sm-9">Doe</p>
+                                        <p class="col-sm-9">{{ Auth::user()->name }}</p>
                                     </div>
                                     <div class="row">
                                         <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Email</p>
                                         <p class="col-sm-9">
-                                            <a href="">johndoe@gmail.com</a>
+                                            <a href="">{{ Auth::user()->email }}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -73,18 +72,16 @@
                                                 <span aria-hidden="true">&times;</span> </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form action="{{ route('profile.update') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PATCH')
                                                 <div class="row form-row">
                                                     <div class="col-12 col-sm-6">
                                                         <div class="form-group">
-                                                            <label>Prenom</label>
-                                                            <input type="text" class="form-control" value="John">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-sm-6">
-                                                        <div class="form-group">
                                                             <label>Nom</label>
-                                                            <input type="text" class="form-control" value="Doe">
+                                                            <input type="text" class="form-control"
+                                                                value="{{ Auth::user()->name }}" name="name">
                                                         </div>
                                                     </div>
 
@@ -92,7 +89,14 @@
                                                         <div class="form-group">
                                                             <label>Email</label>
                                                             <input type="email" class="form-control"
-                                                                value="johndoe@gmail.com">
+                                                                value="{{ Auth::user()->email }}" name="email">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Photo de profile</label>
+                                                            <input type="file" class="form-control" name="image">
                                                         </div>
                                                     </div>
 
