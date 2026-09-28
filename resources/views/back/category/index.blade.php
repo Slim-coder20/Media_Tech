@@ -15,6 +15,11 @@
 
 @section('dashboard-content')
     <div class="row">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="col-sm-12">
             <div class="card card-table">
                 <div class="card-body booking_card">

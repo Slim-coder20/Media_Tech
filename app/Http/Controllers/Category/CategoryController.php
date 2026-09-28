@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Requests\StoreCategoryRequest;
-use App\Http\Requests\UpdateCategoryRequest;
-use App\Models\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Models\Category;
+
 class CategoryController extends Controller
 {
     /**
@@ -29,7 +30,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $request->validated();
+        Category::create($request->all());
+        return to_route('categories.index')->with('success', 'Catégorie créée avec succès');
     }
 
     /**
