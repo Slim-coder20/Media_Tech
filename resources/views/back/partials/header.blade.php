@@ -32,10 +32,13 @@
               </div>
               <a class="dropdown-item" href="{{ route('profile.edit')}}">Profile</a>
               <a class="dropdown-item" href="{{ route('profile.update')}}">Paramettre</a>
-              <a class="dropdown-item" href="{{ route('logout')}}">Deconnexion</a>
+              <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="dropdown-item">Deconnexion</button>
+              </form>
           </div>
       </li>
-  </ul>
+  </ul> 
   <div class="top-nav-search">
       <form>
           <input type="text" class="form-control" placeholder="Search here" />
