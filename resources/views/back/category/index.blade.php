@@ -26,27 +26,36 @@
                                     <th>ID Categorie</th>
                                     <th>Nom</th>
                                     <th>Description</th>
+                                    <th>Status</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>CAT-0001</td>
-                                    <td>Nom categorie</td>
-                                    <td>Breve description</td>
-                                    <td class="text-right">
-                                        <div class="dropdown dropdown-action"> <a href="#"
-                                                class="action-icon dropdown-toggle" data-toggle="dropdown"
-                                                aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item"
-                                                    href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i>
-                                                    Modifier</a> <a class="dropdown-item" href="#" data-toggle="modal"
-                                                    data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i>
-                                                    Supprimer</a> </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @foreach ($categories as $category)
+                                    <tr>
+                                        <td>#00{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->description }}</td>
+                                        <td class="text-center">
+                                            <span class="badge badge-pill bg-success inv-badge">
+                                                {{ $category->isActive == 1 ? 'Acvtive' : 'Desactive' }}
+                                            </span>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action"> <a href="#"
+                                                    class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                                    aria-expanded="false"><i
+                                                        class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item"
+                                                        href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i>
+                                                        Modifier</a> <a class="dropdown-item" href="#"
+                                                        data-toggle="modal" data-target="#delete_asset"><i
+                                                            class="fas fa-trash-alt m-r-5"></i>
+                                                        Supprimer</a> </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
 
                             <div id="delete_asset" class="modal fade delete-modal" role="dialog">
