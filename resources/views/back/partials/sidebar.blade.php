@@ -24,7 +24,7 @@
                       </li>
 
                       <li>
-                          <a href="add-categories.html"> Ajouter une catégorie </a>
+                          <a href="{{ route('categories.create') }}"> Ajouter une catégorie </a>
                       </li>
                   </ul>
               </li>

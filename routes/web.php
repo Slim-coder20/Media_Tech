@@ -21,6 +21,6 @@ Route::middleware('auth')->group(function () {
 
 // Route for categorries management dashboard
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-
+Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
 
 require __DIR__.'/auth.php';

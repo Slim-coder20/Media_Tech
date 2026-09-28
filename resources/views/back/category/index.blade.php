@@ -7,7 +7,7 @@
         <div class="col">
             <div class="mt-5">
                 <h4 class="card-title float-left mt-2">Categories</h4>
-                <a href="add-categories.html" class="btn btn-primary float-right veiwbutton">Ajouter une categorie</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-primary float-right veiwbutton">Ajouter une categorie</a>
             </div>
         </div>
     </div>
