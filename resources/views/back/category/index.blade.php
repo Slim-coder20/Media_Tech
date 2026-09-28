@@ -7,7 +7,8 @@
         <div class="col">
             <div class="mt-5">
                 <h4 class="card-title float-left mt-2">Categories</h4>
-                <a href="{{ route('categories.create') }}" class="btn btn-primary float-right veiwbutton">Ajouter une categorie</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-primary float-right veiwbutton">Ajouter une
+                    categorie</a>
             </div>
         </div>
     </div>
@@ -15,11 +16,6 @@
 
 @section('dashboard-content')
     <div class="row">
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
         <div class="col-sm-12">
             <div class="card card-table">
                 <div class="card-body booking_card">
@@ -43,10 +39,10 @@
                                                 class="action-icon dropdown-toggle" data-toggle="dropdown"
                                                 aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item"
-                                                href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i>
-                                                Modifier</a> <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i>
-                                                Supprimer</a> </div>
+                                                    href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i>
+                                                    Modifier</a> <a class="dropdown-item" href="#" data-toggle="modal"
+                                                    data-target="#delete_asset"><i class="fas fa-trash-alt m-r-5"></i>
+                                                    Supprimer</a> </div>
                                         </div>
                                     </td>
                                 </tr>
