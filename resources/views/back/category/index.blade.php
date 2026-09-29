@@ -42,43 +42,50 @@
                                             </span>
                                         </td>
                                         <td class="text-right">
-                                            <div class="dropdown dropdown-action"> <a href="#"
-                                                    class="action-icon dropdown-toggle" data-toggle="dropdown"
-                                                    aria-expanded="false"><i
-                                                        class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                            <div class="dropdown dropdown-action">
+                                                <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v ellipse_color"></i>
+                                                </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item"
-                                                        href="{{ route('categories.edit', $category) }}"><i
-                                                            class="fas fa-pencil-alt m-r-5"></i>
-                                                        Modifier</a> 
-                                                        <a class="dropdown-item" href="#"
-                                                        data-toggle="modal" data-target="#delete_asset"><i
-                                                            class="fas fa-trash-alt m-r-5"></i>
-                                                        Supprimer</a>
+                                                        href="{{ route('categories.edit', $category) }}">
+                                                        <i class="fas fa-pencil-alt m-r-5"></i> Modifier
+                                                    </a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                                        data-target="#delete_asset"
+                                                        data-action="{{ route('categories.destroy', $category) }}"
+                                                        onclick="document.getElementById('delete-category-form').action = this.dataset.action">
+                                                        <i class="fas fa-trash-alt m-r-5"></i> Supprimer
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
-
-                            <div id="delete_asset" class="modal fade delete-modal" role="dialog">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-body text-center">
-                                            <img src="assets/img/sent.png" alt="" width="50" height="46" />
-                                            <h3 class="delete_class">
-                                                Etes vous sure de vouloir supprimer cet element ?
-                                            </h3>
+                        </table>
+                        <div id="delete_asset" class="modal fade delete-modal" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <img src="{{ asset('back_auth/assets/img/sent.png') }}" alt="" width="50"
+                                            height="46" />
+                                        <h3 class="delete_class">
+                                            Etes vous sure de vouloir supprimer cet element ?
+                                        </h3>
+                                        <form id="delete-category-form" method="POST">
+                                            @csrf
+                                            @method('DELETE')
                                             <div class="m-t-20">
                                                 <a href="#" class="btn btn-white" data-dismiss="modal">Fermer</a>
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
