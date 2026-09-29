@@ -46,12 +46,16 @@
                                                     class="action-icon dropdown-toggle" data-toggle="dropdown"
                                                     aria-expanded="false"><i
                                                         class="fas fa-ellipsis-v ellipse_color"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right"> <a class="dropdown-item"
-                                                        href="edit-categorie.html"><i class="fas fa-pencil-alt m-r-5"></i>
-                                                        Modifier</a> <a class="dropdown-item" href="#"
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('categories.edit', $category) }}"><i
+                                                            class="fas fa-pencil-alt m-r-5"></i>
+                                                        Modifier</a> 
+                                                        <a class="dropdown-item" href="#"
                                                         data-toggle="modal" data-target="#delete_asset"><i
                                                             class="fas fa-trash-alt m-r-5"></i>
-                                                        Supprimer</a> </div>
+                                                        Supprimer</a>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>

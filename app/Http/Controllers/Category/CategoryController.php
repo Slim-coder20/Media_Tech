@@ -42,7 +42,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+       
     }
 
     /**
@@ -50,7 +50,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('back.category.create-category', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -58,7 +60,10 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $request->validated($request->all());
+        $category->update($request->all());
+
+        return to_route('categories.index')->with('success',  'Categorie modifé avec succès');
     }
 
     /**
